@@ -1,19 +1,20 @@
-const express = require("express");
-const bodyParser = require('body-parser');
-const app = express();
-
-const PORT = 5000
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`)
-})
-
-app.get('/', function (req, res) {
-    res.send('Saludos desde express');
-  });
-app.post('/hola', function (req, res) {
-    res.send('[POST]Saludos desde express');
-  });
-  app.get('/hola', function (req, res) {
-    res.send('[GET]Saludos desde express');
-  });
+import express from 'express'
+const express = require('express'),
+      bodyParser = require('body-parser'),
+      jwt = require('jsonwebtoken'),
+      config = require('./configs/config'),
+      app = express();
+// 1
+app.set('llave', config.llave);
+// 2
+app.use(bodyParser.urlencoded({ extended: true }));
+// 3
+app.use(bodyParser.json());
+// 4
+app.listen(3000,()=>{
+    console.log('Servidor iniciado en el puerto 3000') 
+});
+// 5
+app.get('/', function(req, res) {
+    res.send('Inicio');
+});
